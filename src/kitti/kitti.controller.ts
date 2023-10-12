@@ -1,11 +1,16 @@
 import { Controller, Get, Post, Put, Delete, Param, Query, Body } from '@nestjs/common';
 import { CreateKittiDto } from './dto/create-kitti.dto';
+import { KittiService } from './kitti.service';
+
+
 
 @Controller('kitti')
 export class KittiController {
+    constructor(private readonly kittiService: KittiService) {}
+
     @Get()
-    getKitti(@Query('type') type: string) { 
-        return [{ type }];
+    getKitti(@Query('weapon') weapon: 'sword' | 'spear') { 
+        return this.kittiService.getKittiByWeapon(weapon);
     }
 
     @Get(':id')
