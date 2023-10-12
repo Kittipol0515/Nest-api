@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Put, Delete, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Query, Body } from '@nestjs/common';
+import { CreateKittiDto } from './dto/create-kitti.dto';
 
 @Controller('kitti')
 export class KittiController {
@@ -15,8 +16,10 @@ export class KittiController {
     }
 
     @Post()
-    createKitti() {
-        return {};
+    createKitti(@Body() createKittiDto: CreateKittiDto) {
+        return {
+            name: createKittiDto.name
+        };
     }
 
     @Put(':id')
