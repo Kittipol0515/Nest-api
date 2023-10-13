@@ -21,7 +21,7 @@ export class KittiController {
 
     @Post()
     createKitti(@Body() createKittiDto: CreateKittiDto) {
-        return this.kittiService.createKitti(createKittiDto)
+        return this.kittiService.createKitti(createKittiDto);
     }
 
     @Put(':id')

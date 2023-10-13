@@ -51,7 +51,7 @@ export class KittiService {
 
         this.kitti = this.kitti.filter((kitti) => kitti.id !== id);
 
-        return toBeRemoved
+        return toBeRemoved;
     }
     
 }
