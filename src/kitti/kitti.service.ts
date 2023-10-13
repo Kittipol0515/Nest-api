@@ -1,3 +1,4 @@
+import { UpdateKittiDto } from './dto/update-kitti.dto';
 import { CreateKittiDto } from './dto/create-kitti.dto';
 import { Injectable } from '@nestjs/common';
 
@@ -8,7 +9,7 @@ export class KittiService {
         { id: 1, name: 'KittiB', weapon: 'gun'}
     ];
 
-    getKittiByWeapon(weapon?: 'sword' | 'spear') {
+    getKittiByWeapon(weapon?: 'sword' | 'gun') {
         if (weapon) {
             return this.kitti.filter((kitti) => kitti.weapon === weapon);
         }
@@ -32,6 +33,25 @@ export class KittiService {
         };
         this.kitti.push(newKitti);
         return newKitti;
+    }
+
+    updateKitti(id: number, updateKittiDto: UpdateKittiDto){
+        this.kitti = this.kitti.map((kitti) => {
+            if(kitti.id === id) {
+                return {...kitti, ...updateKittiDto}
+            }
+
+            return kitti;
+        })
+        return this.getKittiById(id);
+    }
+
+    removeKitti(id : number) {
+        const toBeRemoved = this.getKittiById(id);
+
+        this.kitti = this.kitti.filter((kitti) => kitti.id !== id);
+
+        return toBeRemoved
     }
     
 }
